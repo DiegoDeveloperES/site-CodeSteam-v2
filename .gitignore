@@ -1,0 +1,12 @@
+﻿node_modules/
+build/
+dist/
+dist-server/
+coverage/
+.DS_Store
+*.log
+
+# Variaveis de ambiente
+.env
+.env.*
+!.env.example

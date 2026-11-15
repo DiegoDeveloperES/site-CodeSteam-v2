@@ -1,0 +1,216 @@
+/* Fontes do CUBYX, servidas localmente (mesmos arquivos do WEBSITE). */
+@font-face {
+  font-family: "Nunito";
+  font-style: normal;
+  font-weight: 400 900;
+  font-display: swap;
+  src: url("/fonts/nunito.woff2") format("woff2");
+}
+
+@font-face {
+  font-family: "Fredoka";
+  font-style: normal;
+  font-weight: 300 700;
+  font-display: swap;
+  src: url("/fonts/fredoka.woff2") format("woff2");
+}
+
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+    scroll-padding-top: 88px;
+  }
+
+  body {
+    @apply bg-page text-ink font-sans antialiased;
+  }
+
+  :focus-visible {
+    outline: 3px solid #29B6E8;
+    outline-offset: 3px;
+  }
+
+  ::selection {
+    background: #E1F4FC;
+    color: #08729F;
+  }
+}
+
+@layer components {
+  /* Botão "de jogo" do CUBYX: sombra sólida que afunda ao clicar.
+     Aqui um pouco mais discreto que no app (sombra de 4px). */
+  .cx-btn {
+    --btn-fill: #0A8FC7;
+    --btn-shadow: #076A94;
+    --btn-ink: #FFFFFF;
+    @apply inline-flex items-center justify-center gap-2 rounded-2xl px-6 font-display font-semibold text-[17px] leading-none no-underline;
+    min-height: 52px;
+    color: var(--btn-ink);
+    background: var(--btn-fill);
+    box-shadow: 0 4px 0 var(--btn-shadow);
+    transition: transform 0.08s ease, box-shadow 0.08s ease, filter 0.12s ease;
+  }
+
+  .cx-btn:hover {
+    filter: brightness(1.06);
+  }
+
+  .cx-btn:active:not(:disabled) {
+    transform: translateY(4px);
+    box-shadow: 0 0 0 var(--btn-shadow);
+  }
+
+  .cx-btn:disabled {
+    --btn-fill: #D5DEE9;
+    --btn-shadow: #C3CDDA;
+    --btn-ink: #6B7894;
+    cursor: not-allowed;
+    filter: none;
+  }
+
+  .cx-btn-white {
+    --btn-fill: #FFFFFF;
+    --btn-shadow: #D5DEE9;
+    --btn-ink: #1F2A44;
+    border: 2px solid #D5DEE9;
+  }
+
+  .cx-btn-green {
+    --btn-fill: #34A300;
+    --btn-shadow: #257500;
+  }
+
+  /* Cartão branco com borda e sombra sólida (cartões do Hub). */
+  .cx-card {
+    @apply bg-white rounded-cx-lg;
+    border: 2px solid #E1E8F0;
+    box-shadow: 0 6px 0 #DCE4EE;
+  }
+
+  .cx-card-hover {
+    transition: transform 0.18s ease, box-shadow 0.18s ease;
+  }
+
+  .cx-card-hover:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 10px 0 #DCE4EE;
+  }
+
+  .cx-eyebrow {
+    @apply inline-flex w-fit items-center gap-2 rounded-full px-3.5 py-1 text-[13px] font-extrabold uppercase tracking-[0.06em];
+  }
+
+  .cx-input {
+    @apply w-full rounded-[14px] bg-white px-4 py-3 text-[15px] font-semibold text-ink placeholder:font-medium placeholder:text-[#7F8BA0];
+    border: 2px solid #D5DEE9;
+    transition: border-color 0.12s ease;
+  }
+
+  .cx-input:focus {
+    outline: none;
+    border-color: #29B6E8;
+  }
+
+  /* Bloco de programação (lembra o Blockly do editor). O encaixe de cima é
+     recortado com a cor do fundo do workspace; o de baixo "sai" do bloco. */
+  .cx-block {
+    --block: #0A8FC7;
+    --block-dark: #076A94;
+    @apply relative inline-flex items-center gap-2 rounded-lg px-4 py-2.5 text-[14px] font-extrabold;
+    color: #FFFFFF;
+    background: var(--block);
+    box-shadow: inset 0 -3px 0 rgba(0, 0, 0, 0.16), 0 0 0 1.5px var(--block-dark);
+  }
+
+  .cx-block::before,
+  .cx-block::after {
+    content: "";
+    position: absolute;
+    left: 16px;
+    width: 22px;
+    height: 6px;
+    border-radius: 0 0 6px 6px;
+  }
+
+  .cx-block::before {
+    top: 0;
+    background: #FFFFFF;
+    box-shadow: inset 0 -1.5px 0 var(--block-dark);
+  }
+
+  .cx-block::after {
+    bottom: -6px;
+    z-index: 1;
+    background: var(--block);
+    box-shadow: 0 1.5px 0 var(--block-dark);
+  }
+
+  .cx-block-hat {
+    border-top-left-radius: 22px;
+    border-top-right-radius: 14px;
+    padding-top: 14px;
+  }
+
+  .cx-block-hat::before {
+    display: none;
+  }
+
+  .cx-block-last::after {
+    display: none;
+  }
+}
+
+/* Animações do mascote (iguais às do Hub). */
+.cx-bob {
+  animation: cxBob 3.2s ease-in-out infinite;
+}
+
+.cx-wave {
+  transform-box: fill-box;
+  transform-origin: 100% 100%;
+  animation: cxWave 1.6s ease-in-out infinite alternate;
+}
+
+.cx-blink {
+  transform-box: fill-box;
+  transform-origin: center;
+  animation: cxEyeBlink 4.5s ease-in-out infinite;
+}
+
+@keyframes cxBob {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes cxWave {
+  from { transform: rotate(-4deg); }
+  to { transform: rotate(6deg); }
+}
+
+@keyframes cxEyeBlink {
+  0%, 90%, 100% { transform: scaleY(1); }
+  94% { transform: scaleY(0.1); }
+}
+
+/* Fundo do workspace de blocos: grade de pontos. */
+.cx-grid {
+  background-color: #FFFFFF;
+  background-image: radial-gradient(#D5DEE9 1.2px, transparent 1.2px);
+  background-size: 22px 22px;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+
+  .cx-bob,
+  .cx-wave,
+  .cx-blink {
+    animation: none;
+  }
+}
