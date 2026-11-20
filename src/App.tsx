@@ -9,16 +9,13 @@ import {
   Check,
   CheckCircle2,
   ClipboardList,
-  Cpu,
   GraduationCap,
   Mail,
   MessageCircle,
   Monitor,
-  Presentation,
   Route,
   ScanEye,
   Send,
-  Trophy,
   Users,
 } from "lucide-react";
 import React, { useState } from "react";
@@ -1368,30 +1365,28 @@ const companyPillars = [
   },
 ];
 
-const teamExperience = [
+const teamMembers = [
   {
-    icon: GraduationCap,
-    tile: "bg-cyan-tint text-cyan-text",
-    title: "Formação em engenharia",
-    desc: "Engenheiros eletricistas com experiência em automação, robótica e IA.",
+    name: "Bruno Neves Amigo",
+    area: "Educação e integração tecnológica",
+    photoSrc: "/assets/bruno-neves-amigo.png",
+    highlights: [
+      "Engenheiro eletricista e mestre pela UFES.",
+      "Docente de Engenharia Elétrica e Robótica.",
+      "Criou os cursos Programação Aplicada à Robótica e Meninas Programadoras.",
+      "Orientou estudantes para a Olimpíada Brasileira de Robótica (OBR).",
+    ],
   },
   {
-    icon: Presentation,
-    tile: "bg-yellow-tint text-yellow-text",
-    title: "Docência",
-    desc: "Professores de Engenharia Elétrica, Robótica, Eletrônica, Inteligência Artificial e Redes Neurais.",
-  },
-  {
-    icon: Trophy,
-    tile: "bg-green-tint text-green-text",
-    title: "Educação em robótica",
-    desc: "Criação dos cursos Programação Aplicada à Robótica e Meninas Programadoras, e orientação de estudantes para a Olimpíada Brasileira de Robótica (OBR).",
-  },
-  {
-    icon: Cpu,
-    tile: "bg-purple-tint text-purple-shadow",
-    title: "Desenvolvimento de tecnologia",
-    desc: "Projeto de eletrônica e sistemas embarcados que unem hardware, programação e IA em soluções para a sala de aula.",
+    name: "Tiago Reinan Barreto de Oliveira",
+    area: "Automação inteligente e sistemas embarcados",
+    photoSrc: "/assets/tiago-reinan-barreto.png",
+    highlights: [
+      "Engenheiro eletricista e mestre em Automação Inteligente pela UFES.",
+      "Docente de Eletrônica, Inteligência Artificial e Redes Neurais.",
+      "Experiência em microcontroladores, circuitos e sistemas embarcados.",
+      "Integra hardware, programação e IA em projetos educacionais.",
+    ],
   },
 ];
 
@@ -1449,24 +1444,28 @@ const Team = () => (
             Experiência da equipe
           </p>
           <div className="mt-4 grid gap-5 sm:grid-cols-2">
-            {teamExperience.map((t) => {
-              const Icon = t.icon;
-              return (
-                <article key={t.title} className="cx-card p-6">
-                  <span
-                    className={`grid h-11 w-11 place-items-center rounded-xl ${t.tile}`}
-                  >
-                    <Icon className="h-5 w-5" strokeWidth={2.2} />
-                  </span>
-                  <h3 className="mt-4 font-display text-[20px] font-semibold leading-tight text-ink">
-                    {t.title}
-                  </h3>
-                  <p className="mt-2 text-[15px] font-semibold leading-relaxed text-muted">
-                    {t.desc}
-                  </p>
-                </article>
-              );
-            })}
+            {teamMembers.map((member) => (
+              <article key={member.name} className="cx-card flex flex-col p-6">
+                <img
+                  src={member.photoSrc}
+                  alt={member.name}
+                  className="mx-auto h-28 w-28 rounded-full border-2 border-line object-cover object-center shadow-[0_4px_0_#DCE4EE] sm:h-32 sm:w-32"
+                />
+                <h3 className="mt-5 font-display text-[20px] font-semibold leading-tight text-ink">
+                  {member.name}
+                </h3>
+                <p className="mt-1.5 text-[14px] font-extrabold leading-snug text-cyan-text">
+                  {member.area}
+                </p>
+                <ul className="mt-4 space-y-2.5">
+                  {member.highlights.map((highlight) => (
+                    <CheckItem key={highlight} tone="bg-cyan-tint text-cyan-text">
+                      {highlight}
+                    </CheckItem>
+                  ))}
+                </ul>
+              </article>
+            ))}
           </div>
         </div>
       </div>
